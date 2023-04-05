@@ -1,0 +1,11 @@
+version: 1.0
+
+services:
+  dev_db:
+    image: postgres:15
+    restart: on-failure
+    ports:
+      # External and internal ports / 5434 default port
+      - "5435:5434"
+    environment:
+      POSTGRES_PASSWORD: postgres
