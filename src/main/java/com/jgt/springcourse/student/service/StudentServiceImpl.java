@@ -14,6 +14,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
+import java.util.Optional;
+
+import static java.util.Objects.requireNonNull;
 
 @Service @RequiredArgsConstructor
 public class StudentServiceImpl implements StudentService{
@@ -32,7 +35,7 @@ public class StudentServiceImpl implements StudentService{
     @Override
     public StudentDto getStudentById(Long studentId) throws ResourceNotFoundException {
 
-        Objects.requireNonNull(studentId, "Student ID must not be null");
+        requireNonNull(studentId, "Student ID must not be null");
 
         return studentRepository.findById(studentId)
                 .map(studentMapper)
@@ -46,18 +49,33 @@ public class StudentServiceImpl implements StudentService{
                 .name(studentRequest.name())
                 .studentId(studentRequest.studentId())
                 .build();
+        studentRepository.save(student);
+    }
+
+    @Override @Transactional
+    public void updateStudent(Long studentId, StudentRequest studentRequest) throws ResourceNotFoundException {
+
+        requireNonNull(studentId, "Student ID must not be null");
+        requireNonNull(studentRequest, "Student request must not be null");
+
+        var student = studentRepository.findById(studentId)
+                .orElseThrow(()-> new ResourceNotFoundException("Student not found for ID: " + studentId) );
+
+        Optional.ofNullable(studentRequest.name())
+                .ifPresent(student::setName);
+
+        Optional.ofNullable(studentRequest.studentId())
+                .ifPresent(student::setStudentId);
 
         studentRepository.save(student);
 
     }
 
-    @Override
-    public void updateStudent(Long studentId, StudentRequest studentRequest) throws ResourceNotFoundException {
-
-    }
-
-    @Override
+    @Override @Transactional
     public void deleteStudent(Long studentId) throws ResourceNotFoundException {
-
+        requireNonNull(studentId, "Student ID must not be null");
+        var student = studentRepository.findById(studentId)
+                .orElseThrow(()-> new ResourceNotFoundException("Student not found for ID: " + studentId) );
+        studentRepository.delete(student);
     }
 }

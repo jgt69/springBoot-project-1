@@ -1,7 +1,11 @@
 package com.jgt.springcourse.student;
 
+import com.jgt.springcourse.university.UniversityClass;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.HashSet;
+import java.util.Set;
 
 import static jakarta.persistence.GenerationType.IDENTITY;
 
@@ -13,7 +17,7 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 public class Student {
 
 
-//    Adding ID and Generatedvalue atributes to manage the primary key for our entity
+//    Adding ID and Generatedvalue attributes to manage the primary key for our entity
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
@@ -24,4 +28,11 @@ public class Student {
 
     @Column(nullable = false)
     private Integer studentId;
+
+//    CREATE MANY-TO-MANY RELATIONSHIP
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE})
+    // Specify our join table so we can manipulate within POSTGRES
+    @JoinTable(name = "student_university_class", joinColumns = {@JoinColumn(name = "studentId")},
+                inverseJoinColumns = {@JoinColumn(name = "university_class_id")})
+    private Set<UniversityClass> universityClasses = new HashSet<>();
 }
