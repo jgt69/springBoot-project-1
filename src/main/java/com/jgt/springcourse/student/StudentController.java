@@ -46,14 +46,14 @@ public class StudentController {
         studentServiceImpl.createStudent(studentRequest);
     }
     // Update operation
-    @PutMapping("/{id")
+    @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void updateStudent(@PathVariable(value = "id") Long id, @RequestBody @Valid StudentRequest
             studentRequest) throws ResourceNotFoundException {
         studentServiceImpl.updateStudent(id, studentRequest);
     }
     // Delete operation
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteStudent(@PathVariable Long id) throws ResourceNotFoundException {
         studentServiceImpl.deleteStudent(id);

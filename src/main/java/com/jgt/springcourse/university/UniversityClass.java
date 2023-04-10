@@ -40,6 +40,6 @@ public class UniversityClass {
     @ManyToMany(mappedBy = "universityClasses", fetch = FetchType.EAGER)
     // This is saying that it should be a set of students, so we shouldn't have the same student in the same class twice
     // A set is an unordered collection of objects in which duplicate values cannot be stored.
-    private Set<Student> student = new HashSet<>();
+    private Set<Student> students = new HashSet<>();
 
 }

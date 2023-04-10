@@ -4,7 +4,7 @@ import com.jgt.springcourse.exception.ResourceNotFoundException;
 import com.jgt.springcourse.university.UniversityClass;
 import com.jgt.springcourse.university.helpers.UniversityClassDto;
 import com.jgt.springcourse.university.helpers.UniversityClassMapper;
-import com.jgt.springcourse.university.helpers.UniversityClassRepository;
+import com.jgt.springcourse.university.UniversityClassRepository;
 import com.jgt.springcourse.university.helpers.UniversityClassRequest;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
@@ -13,7 +13,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
