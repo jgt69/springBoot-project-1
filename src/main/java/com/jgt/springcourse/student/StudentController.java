@@ -33,7 +33,7 @@ public class StudentController {
         return ResponseEntity.ok().body(students);
     }
     // Get student by ID
-    @GetMapping("/{id") // Web browser path variable
+    @GetMapping("/{id}") // Web browser path variable
     public ResponseEntity<StudentDto> getStudentById(@PathVariable(value = "id") Long id) throws ResourceNotFoundException {
         StudentDto studentDto = studentServiceImpl.getStudentById(id);
 

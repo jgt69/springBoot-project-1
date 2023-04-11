@@ -13,10 +13,8 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @Getter @Setter @Builder
 @AllArgsConstructor @NoArgsConstructor
 
-@Entity @Table(name = "students")
+@Entity @Table(name = "student")
 public class Student {
-
-
 //    Adding ID and Generatedvalue attributes to manage the primary key for our entity
     @Id
     @GeneratedValue(strategy = IDENTITY)
@@ -32,7 +30,7 @@ public class Student {
 //    CREATE MANY-TO-MANY RELATIONSHIP
     @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE})
     // Specify our join table so we can manipulate within POSTGRES
-    @JoinTable(name = "student_university_class", joinColumns = {@JoinColumn(name = "studentId")},
+    @JoinTable(name = "student_university_class", joinColumns = {@JoinColumn(name = "student_id")},
                 inverseJoinColumns = {@JoinColumn(name = "university_class_id")})
     private Set<UniversityClass> universityClasses = new HashSet<>();
 }

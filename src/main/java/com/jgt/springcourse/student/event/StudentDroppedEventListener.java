@@ -1,6 +1,5 @@
 package com.jgt.springcourse.student.event;
 
-
 import com.jgt.springcourse.exception.ResourceNotFoundException;
 import com.jgt.springcourse.student.StudentRepository;
 import com.jgt.springcourse.university.UniversityClassRepository;
@@ -48,7 +47,7 @@ public class StudentDroppedEventListener {
 
         // Sending email when student has been dropped
         var recipientEmail = "tutmotsis69@gmail.com";
-        var subject = " Student Dropped";
+        var subject = "Student Dropped";
         var message = String.format("Student %s has been dropped from %s class", student.getName(), universityClass.getName());
 
         try {
